@@ -3,19 +3,22 @@ require 'minitest/spec'
 
 require 'ext_pool'
 
+# taken from: https://gist.github.com/jodosha/1560208
+
 MiniTest::Spec.class_eval do
   def self.shared_examples
     @shared_examples ||= {}
   end
 end
  
-def shared_examples_for(desc, &block)
-  MiniTest::Spec.shared_examples[desc] = block
-end
+module MiniTest::Spec::SharedExamples
+  def shared_examples_for(desc, &block)
+    MiniTest::Spec.shared_examples[desc] = block
+  end
  
-def it_behaves_like(desc, &block)
-  describe desc do
-    instance_eval &MiniTest::Spec.shared_examples[desc]
-    instance_eval &block if block_given?
+  def it_behaves_like(desc)
+    self.instance_eval(&MiniTest::Spec.shared_examples[desc])
   end
 end
+ 
+Object.class_eval { include(MiniTest::Spec::SharedExamples) }

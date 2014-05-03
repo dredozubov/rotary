@@ -1,13 +1,13 @@
 # Needed for testing. Acts as example.
 module ExtPool
-  module Session
+  module Serializer
     module String
-      def initialize(value)
-        @value = value
+      def self.dump(value)
+        value.to_s
       end
 
-      def store
-        @value.to_s
+      def self.load(value)
+        value
       end
     end
   end

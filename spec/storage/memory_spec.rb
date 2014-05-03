@@ -3,7 +3,7 @@ require 'ext_pool/storage/memory'
 require 'storage/shared_examples'
 
 describe ExtPool::Storage::Memory do
-  subject do 
+  subject do
     ExtPool::Storage::Memory.new
   end
   let(:obj) { 'super-session' }

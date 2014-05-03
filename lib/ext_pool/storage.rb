@@ -4,3 +4,4 @@ module ExtPool
 end
 
 require 'ext_pool/storage/memory'
+require 'ext_pool/storage/redis'

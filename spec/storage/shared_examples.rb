@@ -1,4 +1,3 @@
-# taken from: https://gist.github.com/jodosha/1560208
 shared_examples_for :storage do
   describe '#push' do
     it 'puts one object in the pool' do

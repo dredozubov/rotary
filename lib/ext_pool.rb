@@ -1,20 +1,12 @@
 require 'ext_pool/version'
 require 'ext_pool/storage'
+require 'ext_pool/serializer'
 
 module ExtPool
   class Pool
-    def initialize(storage: :memory, session: , limit: 100)
+    def initialize(storage: :memory, serializer: ExtPool::Serializer::Marshal, limit: 100)
       @limit = limit
-      load_storage(storage)
-    end
-
-    def load_storage(storage)
-      @storage = case storage
-        when Class
-          storage.new
-        when [Symbol, String]
-          self.class.const_get("ExtPool::Storage::#{storage.capitalize}").new
-      end
+      ExtPool::Serializer.load_serializer(serializer)
     end
 
     def get
