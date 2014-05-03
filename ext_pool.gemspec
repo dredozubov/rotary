@@ -10,13 +10,16 @@ Gem::Specification.new do |s|
   s.email             = "denis.redozubov@gmail.com"
   s.authors           = [ "Denis Redozubov" ]
   s.has_rdoc          = false
- 
+
   s.files             = %w( README.md Rakefile LICENSE )
   s.files            += Dir.glob("lib/**/*")
   s.files            += Dir.glob("bin/**/*")
   s.files            += Dir.glob("test/**/*")
- 
+
+  s.add_development_dependency 'redis', '~> 3.0.7'
+
   s.description       = <<desc
   Generic pool with pluggable backends for external storage. This way pool can be used by multiple application servers. It can be used to store sessions for external services..
 desc
+
 end
