@@ -1,16 +1,26 @@
 module ExtPool
   module Storage
-    module Memory
-      storage = []
-
-      def put(session)
-        storage.unshift(session)
+    class Memory
+      def initialize
+        clear
       end
 
-      def get
-        storage.pop
+      def push(session)
+        @storage.unshift(session)
+        self
       end
 
+      def pop
+        @storage.pop
+      end
+
+      def size
+        @storage.size
+      end
+
+      def clear
+        @storage = []
+      end
     end
   end
 end
