@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files            += Dir.glob("bin/**/*")
   s.files            += Dir.glob("test/**/*")
 
+  s.add_runtime_dependency 'rake', '~> 10.2.0'
   s.add_development_dependency 'redis', '~> 3.0.7'
 
   s.description       = <<desc
