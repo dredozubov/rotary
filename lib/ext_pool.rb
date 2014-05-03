@@ -1,3 +1,6 @@
+require 'ext_pool/version'
+require 'ext_pool/storage'
+
 module ExtPool
   class Pool
     def initialize(storage: :memory, session: , limit: 100)
@@ -23,5 +26,3 @@ module ExtPool
     end
   end
 end
-
-require 'ext_pool/version'
