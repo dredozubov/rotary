@@ -10,11 +10,10 @@ task :release => :build do
 end
 
 task :console do
-  require 'irb'
-  require 'irb/completion'
+  require 'pry'
   require 'ext_pool'
   ARGV.clear
-  IRB.start
+  Pry.start
 end
 task :c => :console
 
