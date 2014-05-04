@@ -1,7 +1,7 @@
 module ExtPool
   module Storage
     class Memory
-      def initialize
+      def initialize(*)
         clear
       end
 

@@ -7,8 +7,9 @@ module ExtPool
 
     SERIALIZER = ExtPool::Serializer::Marshal
 
-    def initialize(storage: :memory, serializer: SERIALIZER, limit: 100)
+    def initialize(storage: :memory, serializer: SERIALIZER, size: 100, &block)
       @limit = limit
+      define_method(:create, &block)
       ExtPool::Serializer.load_serializer(serializer)
     end
 
