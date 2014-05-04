@@ -19,9 +19,9 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.0'
   s.add_runtime_dependency 'rake', '~> 10.2', '>= 10.2.0'
+  s.add_runtime_dependency 'redis', '~> 3.0', '~> 3.0.7'
   s.add_development_dependency 'pry', '~> 0.9', '~> 0.9.12.6'
   s.add_development_dependency 'turn', '~> 0.9', '~> 0.9.7'
-  s.add_development_dependency 'redis', '~> 3.0', '~> 3.0.7'
 
   s.description       = <<desc
   Generic pool with pluggable backends for external storage. This way pool can be used by multiple application servers. It can be used to store sessions for external services.
