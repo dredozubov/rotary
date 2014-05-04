@@ -26,3 +26,4 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 task :spec => :test
+task :default => :test
