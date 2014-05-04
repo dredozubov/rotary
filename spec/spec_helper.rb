@@ -1,5 +1,9 @@
-require 'turn/autorun'
 require 'minitest/spec'
+begin
+  require 'turn/autorun'
+rescue LoadError
+  require 'minitest/autorun'
+end
 
 require 'ext_pool'
 
