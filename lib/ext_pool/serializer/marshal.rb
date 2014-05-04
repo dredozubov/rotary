@@ -1,1 +1,0 @@
-ExtPool::Serializer::Marshal = Marshal

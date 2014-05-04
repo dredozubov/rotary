@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'ext_pool/serializer'
+require 'rotary/serializer'
 
-describe ExtPool::Serializer do
+describe Rotary::Serializer do
   describe '.load_serializer' do
 
-    subject { ExtPool::Serializer }
+    subject { Rotary::Serializer }
 
     let(:empty_module) { Module.new }
     let(:empty_class) { Class.new }
@@ -18,7 +18,7 @@ describe ExtPool::Serializer do
     end
 
     it 'fails with wrong module' do
-      proc { subject.load_serializer empty_module }.must_raise ExtPool::Serializer::Error
+      proc { subject.load_serializer empty_module }.must_raise Rotary::Serializer::Error
     end
 
     it 'loads valid class' do
@@ -30,31 +30,31 @@ describe ExtPool::Serializer do
     end
 
     it 'fails with a wrong class' do
-      proc { subject.load_serializer empty_class }.must_raise ExtPool::Serializer::Error
+      proc { subject.load_serializer empty_class }.must_raise Rotary::Serializer::Error
     end
 
     it 'loads with a symbol' do
-      subject.load_serializer(:marshal).must_equal ExtPool::Serializer::Marshal
+      subject.load_serializer(:marshal).must_equal Rotary::Serializer::Marshal
     end
 
     it 'loads with an uppercase symbol' do
-      subject.load_serializer(:Marshal).must_equal ExtPool::Serializer::Marshal
+      subject.load_serializer(:Marshal).must_equal Rotary::Serializer::Marshal
     end
 
     it 'fails with a wrong symbol' do
-      proc { subject.load_serializer :wrong }.must_raise ExtPool::Serializer::Error
+      proc { subject.load_serializer :wrong }.must_raise Rotary::Serializer::Error
     end
 
     #it 'loads with a string' do
-      #subject.load_serializer('marshal').must_equal ExtPool::Serializer::Marshal
+      #subject.load_serializer('marshal').must_equal Rotary::Serializer::Marshal
     #end
 
     #it 'loads with an uppercase string' do
-      #subject.load_serializer('Marshal').must_equal ExtPool::Serializer::Marshal
+      #subject.load_serializer('Marshal').must_equal Rotary::Serializer::Marshal
     #end
 
     #it 'fails with a wrong string' do
-      #proc { subject.load_serializer 'Oops' }.must_raise ExtPool::Serializer::Error
+      #proc { subject.load_serializer 'Oops' }.must_raise Rotary::Serializer::Error
     #end
 
   end

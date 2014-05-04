@@ -1,8 +1,8 @@
-require 'ext_pool/version'
-require 'ext_pool/storage'
-require 'ext_pool/serializer'
+require 'rotary/version'
+require 'rotary/storage'
+require 'rotary/serializer'
 
-module ExtPool
+module Rotary
 
   SERIALIZER = :marshal
   STORAGE = :redis
@@ -14,8 +14,8 @@ module ExtPool
       @limit = limit
       storage_options = connection ? { connection: connection } : {}
       define_method(:create, &block)
-      @serializer = ExtPool::Serializer.load_serializer(serializer)
-      @storage = ExtPool::Storage.load_storage(storage, **storage_options)
+      @serializer = Rotary::Serializer.load_serializer(serializer)
+      @storage = Rotary::Storage.load_storage(storage, **storage_options)
     end
 
     def get

@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'ext_pool/serializer/string'
+require 'rotary/serializer/string'
 require 'serializer/shared_examples'
 
-describe ExtPool::Serializer::String do
+describe Rotary::Serializer::String do
 
   let(:obj) { 'imma chargin my laser' }
-  subject { ExtPool::Serializer::String } 
+  subject { Rotary::Serializer::String } 
 
   it_behaves_like :serializer
 end

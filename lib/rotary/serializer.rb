@@ -1,7 +1,7 @@
-require 'ext_pool/serializer/string'
-require 'ext_pool/serializer/marshal'
+require 'rotary/serializer/string'
+require 'rotary/serializer/marshal'
 
-module ExtPool::Serializer
+module Rotary::Serializer
 
   class Error < Exception
   end
@@ -13,7 +13,7 @@ module ExtPool::Serializer
         load_const(serializer)
       else
         unless valid?(serializer)
-          raise ExtPool::Serializer::Error,
+          raise Rotary::Serializer::Error,
             "#{serializer}:#{serializer.class} doesn't respond to either '.load' or '.dump'"
         end
         serializer
@@ -21,7 +21,7 @@ module ExtPool::Serializer
     end
 
     def load_const(serializer)
-      const_get("ExtPool::Serializer::#{serializer.capitalize}")
+      const_get("Rotary::Serializer::#{serializer.capitalize}")
     rescue NameError
       raise_wrong_serializer!(serializer)
     end
@@ -31,7 +31,7 @@ module ExtPool::Serializer
     end
 
     def raise_wrong_serializer!(serializer)
-      raise ExtPool::Serializer::Error, "Wrong serializer #{serializer} of class #{serializer.class}"
+      raise Rotary::Serializer::Error, "Wrong serializer #{serializer} of class #{serializer.class}"
     end
   end
 end

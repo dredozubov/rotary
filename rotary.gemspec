@@ -1,12 +1,12 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'lib')
-require "ext_pool/version"
+require "rotary/version"
  
 Gem::Specification.new do |s|
-  s.name              = "ext_pool"
-  s.version           = ExtPool::VERSION
+  s.name              = "rotary"
+  s.version           = Rotary::VERSION
   s.date              = Time.now.strftime('%Y-%m-%d')
   s.summary           = "Generic pool with pluggable backends."
-  s.homepage          = "http://github.com/dredozubov/ext_pool"
+  s.homepage          = "http://github.com/dredozubov/rotary"
   s.email             = "denis.redozubov@gmail.com"
   s.authors           = [ "Denis Redozubov" ]
   s.has_rdoc          = false
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'redis', '~> 3.0.7'
 
   s.description       = <<desc
-  Generic pool with pluggable backends for external storage. This way pool can be used by multiple application servers. It can be used to store sessions for external services..
+  Generic pool with pluggable backends for external storage. This way pool can be used by multiple application servers. It can be used to store sessions for external services.
 desc
 
 end

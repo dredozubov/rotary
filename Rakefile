@@ -1,17 +1,17 @@
 $LOAD_PATH << File.expand_path('./lib')
-require "ext_pool"
+require "rotary"
  
 task :build do
-  system "gem build ext_pool.gemspec"
+  system "gem build rotary.gemspec"
 end
  
 task :release => :build do
-  system "gem push ext_pool-#{ExtPool::VERSION}"
+  system "gem push rotary-#{Rotary::VERSION}"
 end
 
 task :console do
   require 'pry'
-  require 'ext_pool'
+  require 'rotary'
   ARGV.clear
   Pry.start
 end

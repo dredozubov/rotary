@@ -1,4 +1,4 @@
-module ExtPool
+module Rotary
   module Storage
     class Memory
       def initialize(*)

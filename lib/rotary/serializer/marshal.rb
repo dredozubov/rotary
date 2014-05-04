@@ -1,0 +1,1 @@
+Rotary::Serializer::Marshal = Marshal

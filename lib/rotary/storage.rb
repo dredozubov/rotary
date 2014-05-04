@@ -1,7 +1,7 @@
-require 'ext_pool/storage/memory'
-require 'ext_pool/storage/redis'
+require 'rotary/storage/memory'
+require 'rotary/storage/redis'
 
-module ExtPool
+module Rotary
   module Storage
 
     class Error < Exception
@@ -17,9 +17,9 @@ module ExtPool
       protected
 
       def load_const(storage)
-        const_get("ExtPool::Storage::#{storage.capitalize}")
+        const_get("Rotary::Storage::#{storage.capitalize}")
       rescue NameError
-        raise ExtPool::Storage::Error,
+        raise Rotary::Storage::Error,
           "Wrong storage #{storage} of class #{storage.class}"
       end
     end

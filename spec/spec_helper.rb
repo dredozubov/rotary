@@ -5,7 +5,7 @@ rescue LoadError
   require 'minitest/autorun'
 end
 
-require 'ext_pool'
+require 'rotary'
 
 # taken from: https://gist.github.com/jodosha/1560208
 

@@ -1,7 +1,7 @@
 require 'digest/sha1'
 require 'redis'
 
-module ExtPool
+module Rotary
   module Storage
     class Redis
       class Retry < Exception
@@ -9,7 +9,7 @@ module ExtPool
 
       def initialize(
         connection: ::Redis.new,
-        prefix: "ext",
+        prefix: "rotary",
         ttl: nil,
         serializer: serializer
       )

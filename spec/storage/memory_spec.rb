@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'ext_pool/storage/memory'
+require 'rotary/storage/memory'
 require 'storage/shared_examples'
 
-describe ExtPool::Storage::Memory do
+describe Rotary::Storage::Memory do
   subject do
-    ExtPool::Storage::Memory.new
+    Rotary::Storage::Memory.new
   end
   let(:obj) { 'super-session' }
   before(:each) { subject.push(obj) }

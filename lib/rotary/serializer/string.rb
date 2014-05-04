@@ -1,5 +1,5 @@
 # Needed for testing. Acts as example.
-module ExtPool
+module Rotary
   module Serializer
     module String
       def self.dump(value)
