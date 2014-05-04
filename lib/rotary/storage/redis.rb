@@ -38,10 +38,12 @@ module Rotary
         serialized = @redis.rpop(@pool_list)
         obj = serialized ? @serializer.load(serialized) : nil
         return obj unless @ttl
-        # TTL-only logic below
-        key = ttl_key(serialized)
-        raise Retry unless @redis.get(key)
-        @redis.del(key)
+        if obj
+          # TTL-only logic below
+          key = ttl_key(serialized)
+          raise Retry unless @redis.get(key)
+          @redis.del(key)
+        end
         obj
       rescue Retry
         retry
