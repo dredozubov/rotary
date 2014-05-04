@@ -3,11 +3,13 @@ require 'ext_pool/storage'
 require 'ext_pool/serializer'
 
 module ExtPool
+
+  SERIALIZER = ExtPool::Serializer::Marshal
+  SIZE = 10
+
   class Pool
 
-    SERIALIZER = ExtPool::Serializer::Marshal
-
-    def initialize(storage: :memory, serializer: SERIALIZER, size: 100, &block)
+    def initialize(storage: :memory, serializer: SERIALIZER, size: SIZE, &block)
       @limit = limit
       define_method(:create, &block)
       ExtPool::Serializer.load_serializer(serializer)
