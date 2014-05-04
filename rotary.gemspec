@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.files            += Dir.glob("bin/**/*")
   s.files            += Dir.glob("test/**/*")
 
+  s.required_ruby_version = '~> 2.0'
   s.add_runtime_dependency 'rake', '~> 10.2', '>= 10.2.0'
   s.add_development_dependency 'pry', '~> 0.9', '~> 0.9.12.6'
   s.add_development_dependency 'turn', '~> 0.9', '~> 0.9.7'
