@@ -4,23 +4,22 @@ require 'ext_pool/serializer'
 
 module ExtPool
 
-  SERIALIZER = ExtPool::Serializer::Marshal
+  SERIALIZER = :marshal
+  STORAGE = :redis
   SIZE = 10
 
   class Pool
 
-    def initialize(storage: :memory, serializer: SERIALIZER, size: SIZE, &block)
+    def initialize(storage: STORAGE, connection: nil, serializer: SERIALIZER, size: SIZE, &block)
       @limit = limit
+      storage_options = connection ? { connection: connection } : {}
       define_method(:create, &block)
-      ExtPool::Serializer.load_serializer(serializer)
+      @serializer = ExtPool::Serializer.load_serializer(serializer)
+      @storage = ExtPool::Storage.load_storage(storage, **storage_options)
     end
 
     def get
-      @storage.get
-    end
-
-    def put
-      @storage.put
+      @storage.pop
     end
   end
 end

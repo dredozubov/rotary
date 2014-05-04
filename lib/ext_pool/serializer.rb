@@ -23,7 +23,6 @@ module ExtPool::Serializer
     def load_const(serializer)
       const_get("ExtPool::Serializer::#{serializer.capitalize}")
     rescue NameError
-      p "no such constant: ExtPool::Serializer::#{serializer.capitalize}"
       raise_wrong_serializer!(serializer)
     end
 

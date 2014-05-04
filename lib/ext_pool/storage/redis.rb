@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'redis'
 
 module ExtPool
   module Storage
@@ -7,7 +8,7 @@ module ExtPool
       end
 
       def initialize(
-        connection: Redis.new,
+        connection: ::Redis.new,
         prefix: "ext",
         ttl: nil,
         serializer: serializer
@@ -16,7 +17,6 @@ module ExtPool
         @prefix = "#{prefix}::"
         @ttl = ttl # in seconds
         @pool_list = "#{@prefix}pool"
-        @size = size
         @serializer = serializer
       end
 

@@ -20,5 +20,7 @@ describe ExtPool::Storage::Redis do
   end
 
   it_behaves_like :storage
+
+  # ttl functionality not tested properly
 end
 
