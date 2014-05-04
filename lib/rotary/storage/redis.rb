@@ -12,7 +12,7 @@ module Rotary
         ::Redis.new
       end
 
-      def initialize(connection:, prefix:, ttl:, serializer:)
+      def initialize(connection:, ttl:, serializer:, prefix: 'rotary')
         @redis = connection
         @prefix = "#{prefix}::"
         @ttl = ttl # in seconds
