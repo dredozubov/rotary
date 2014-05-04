@@ -3,5 +3,5 @@ require 'ext_pool'
 
 describe ExtPool do
 
-  let(:pool) { ExtPool.new(session: :string, storage: :memory) }
+  #let(:pool) { ExtPool.new(session: :string, storage: :memory) }
 end

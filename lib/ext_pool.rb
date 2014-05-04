@@ -4,7 +4,10 @@ require 'ext_pool/serializer'
 
 module ExtPool
   class Pool
-    def initialize(storage: :memory, serializer: ExtPool::Serializer::Marshal, limit: 100)
+
+    SERIALIZER = ExtPool::Serializer::Marshal
+
+    def initialize(storage: :memory, serializer: SERIALIZER, limit: 100)
       @limit = limit
       ExtPool::Serializer.load_serializer(serializer)
     end
