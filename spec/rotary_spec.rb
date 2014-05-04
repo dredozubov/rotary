@@ -3,6 +3,8 @@ require 'rotary'
 
 describe Rotary do
   subject do
-    Rotary.new(storage: Redis.new)
+    Rotary.new(
+      connection: Redis.new,
+    ) { OpenStruct.new(fake: :object) }
   end
 end

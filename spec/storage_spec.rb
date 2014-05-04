@@ -14,8 +14,8 @@ describe Rotary::Storage do
       proc { subject.load_storage(:totally_wrong) }.must_raise Rotary::Storage::Error
     end
 
-    it 'loads with a connection' do
-      subject.load_storage(:redis, connection: OpenStruct.new(fake: :connection))
+    it 'fails with wrong argument' do
+      proc { subject.load_storage({fake: :storage}) }.must_raise Rotary::Storage::Error
     end
   end
 end

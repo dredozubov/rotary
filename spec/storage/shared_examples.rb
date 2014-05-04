@@ -18,9 +18,7 @@ shared_examples_for :storage do
     it 'returns the same object' do
       subject.pop.must_equal obj
     end
-  end
 
-  describe '#size' do
     it 'returns nil if storage pool is empty' do
       subject.pop
       subject.pop.must_be_nil

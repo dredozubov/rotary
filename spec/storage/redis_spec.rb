@@ -6,15 +6,16 @@ require 'storage/shared_examples'
 require 'redis'
 
 describe Rotary::Storage::Redis do
-  let(:connection) { Redis.new }
+
   let(:obj) { OpenStruct.new(a: 1, b: 2) }
   before(:each) { subject.push(obj) }
   after(:each) { subject.clear }
 
   subject do
     Rotary::Storage::Redis.new(
-      connection: connection,
+      connection: Rotary::Storage::Redis.default_connection,
       prefix: 'test',
+      ttl: nil,
       serializer: Rotary::Serializer::Marshal
     )
   end

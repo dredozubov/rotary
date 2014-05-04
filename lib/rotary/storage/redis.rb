@@ -4,20 +4,20 @@ require 'redis'
 module Rotary
   module Storage
     class Redis
+
       class Retry < Exception
       end
 
-      def initialize(
-        connection: ::Redis.new,
-        prefix: "rotary",
-        ttl: nil,
-        serializer: serializer
-      )
+      def self.default_connection
+        ::Redis.new
+      end
+
+      def initialize(connection:, prefix:, ttl:, serializer:)
         @redis = connection
         @prefix = "#{prefix}::"
         @ttl = ttl # in seconds
-        @pool_list = "#{@prefix}pool"
         @serializer = serializer
+        @pool_list = "#{@prefix}pool"
       end
 
       def push(obj)
