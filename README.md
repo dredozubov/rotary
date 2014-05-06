@@ -1,0 +1,2 @@
+# rotary [![Build Status](https://secure.travis-ci.org/dredozubov/rotary.png)](http://travis-ci.org/dredozubov/rotary?branch=master) [![Dependency Status](https://gemnasium.com/dredozubov/rotary.png)](https://gemnasium.com/dredozubov/rotary) [![Code Climate](https://codeclimate.com/github/dredozubov/rotary.png)](https://codeclimate.com/github/dredozubov/rotary)
+Generic pool with pluggable backends for external storage. This way pool can be used by multiple application servers. It can be used to store sessions for external services.
