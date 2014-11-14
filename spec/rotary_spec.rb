@@ -60,6 +60,30 @@ describe Rotary do
         proc { 11.times { subject.set(obj) } }.must_raise Rotary::OverflowError
       end
     end
+
+    describe '#clean_older_than' do
+      it 'passes without raising error for redis backend' do
+        pool = Rotary.pool(
+          storage: :redis,
+          prefix: "whatever",
+          limit: 10,
+          ttl: 10
+        )
+        pool.clean_older_than(5)
+      end
+
+      it 'fails with memory backend' do
+        pool = Rotary.pool(
+          storage: :memory,
+          prefix: "whatever",
+          limit: 10,
+          ttl: 10
+        )
+        testForError do
+          pool.clean_older_than(5)
+        end
+      end
+    end
   end
 
   it 'executes custom on_overflow callback' do

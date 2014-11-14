@@ -67,10 +67,10 @@ module Rotary
     # Removes all elements from pool, which means specified by block
     # argument criteria.
     def clean_older_than(n)
-      if storage.respond_to?(:clean_older_than)
-        storage.clean_older_than(n)
+      if @storage.respond_to?(:clean_older_than)
+        @storage.clean_older_than(n)
       else
-        fail "#{storage.class}#clean_where not implemented"
+        fail "#{@storage.class}#clean_where not implemented"
       end
     end
   end

@@ -22,6 +22,11 @@ module Rotary
       def clear
         @storage = []
       end
+
+      # just to make it compatible
+      def self.default_connection
+        self
+      end
     end
   end
 end

@@ -13,6 +13,14 @@ MiniTest::Spec.class_eval do
   def self.shared_examples
     @shared_examples ||= {}
   end
+
+  # http://stackoverflow.com/questions/12499259/why-doesnt-minitestspec-have-a-wont-raise-assertion
+  def testForError # pass me a block and I'll tell you if it raised
+    yield
+    "ok"
+  rescue
+    $!
+  end
 end
 
 module MiniTest::Spec::SharedExamples
