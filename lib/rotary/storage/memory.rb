@@ -1,3 +1,4 @@
+# This storage method is not threadsafe
 module Rotary
   module Storage
     class Memory
