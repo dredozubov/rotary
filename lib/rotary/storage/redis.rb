@@ -4,6 +4,7 @@ require 'redis'
 module Rotary
   module Storage
     class Redis
+      DEFAULT_PREFIX = 'rotary'.freeze
 
       class Retry < Exception
       end
@@ -12,10 +13,10 @@ module Rotary
         ::Redis.new
       end
 
-      def initialize(connection:, ttl:, serializer:, prefix: 'rotary')
+      def initialize(connection:, ttl:, serializer:, prefix: DEFAULT_PREFIX)
         @redis = connection
-        @prefix = "#{prefix}::"
         @ttl = ttl # in seconds
+        @prefix = "#{prefix}::"
         @serializer = serializer
         @pool_list = "#{@prefix}pool"
       end
@@ -55,6 +56,37 @@ module Rotary
 
       def clear
         @redis.del(@pool_list)
+      end
+
+      # Removes sessions, where ttl is bigger than threshold n.
+      def clean_older_than(n)
+        len = @redis.llen(@pool_list)
+
+        # It doesn't have to happen atomically.
+        # New session will be lpush'ed, we can easily check only
+        # N sessions from the right.
+        len.times do
+          session = @redis.rpop(@pool_list)
+
+          # We have no sessions left. It can happen.
+          break unless session
+
+          key = ttl_key(session)
+          ttl_marker = @redis.ttl(key)
+
+          # redis.rb returns -2 when key doesn't exist
+          no_ttl = ttl_marker == -2
+          next if no_ttl
+
+          old = ttl_marker < (@ttl - n)
+          if old
+            # delete ttl key
+            @redis.del(key)
+          else
+            # push back from the left side
+            @redis.lpush(@pool_list, session)
+          end
+        end
       end
 
       protected
