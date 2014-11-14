@@ -35,4 +35,3 @@ module Rotary::Serializer
     end
   end
 end
-

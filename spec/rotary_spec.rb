@@ -67,5 +67,4 @@ describe Rotary do
     2.times { pool.set(obj) }
     pool.set(obj).must_equal :nope
   end
-
 end

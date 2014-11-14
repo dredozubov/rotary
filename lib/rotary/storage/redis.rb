@@ -65,4 +65,3 @@ module Rotary
     end
   end
 end
-

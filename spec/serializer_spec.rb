@@ -56,6 +56,5 @@ describe Rotary::Serializer do
     #it 'fails with a wrong string' do
       #proc { subject.load_serializer 'Oops' }.must_raise Rotary::Serializer::Error
     #end
-
   end
 end
