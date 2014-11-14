@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'lib')
 require "rotary/version"
- 
+
 Gem::Specification.new do |s|
   s.name              = "rotary"
   s.licenses          = ['MIT']
@@ -26,5 +26,4 @@ Gem::Specification.new do |s|
   s.description       = <<desc
   Generic pool with pluggable backends for external storage. This way pool can be used by multiple application servers. It can be used to store sessions for external services.
 desc
-
 end
