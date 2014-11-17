@@ -33,4 +33,10 @@ module MiniTest::Spec::SharedExamples
   end
 end
 
+class Mocker
+  def tester
+    true.must_equal true
+  end
+end
+
 Object.class_eval { include(MiniTest::Spec::SharedExamples) }

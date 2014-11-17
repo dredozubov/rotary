@@ -66,12 +66,12 @@ module Rotary
         # New session will be lpush'ed, we can easily check only
         # N sessions from the right.
         len.times do
-          session = @redis.rpop(@pool_list)
+          serialized_session = @redis.rpop(@pool_list)
 
           # We have no sessions left. It can happen.
-          break unless session
+          break unless serialized_session
 
-          key = ttl_key(session)
+          key = ttl_key(serialized_session)
           ttl_marker = @redis.ttl(key)
 
           # redis.rb returns -2 when key doesn't exist
@@ -82,6 +82,9 @@ module Rotary
           if old
             # delete ttl key
             @redis.del(key)
+            # and execute the block with session as arg
+            session = @serializer.load(serialized_session)
+            yield(session) if block_given?
           else
             # push back from the left side
             @redis.lpush(@pool_list, session)

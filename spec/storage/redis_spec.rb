@@ -73,6 +73,14 @@ describe Rotary::Storage::Redis do
         @rotary_1sec.clean_older_than(7)
         @rotary_1sec.size.must_equal 10
       end
+
+      it 'executes block' do
+        mock = Mocker.new # expectation inside
+
+        @rotary_60sec.push(mock)
+        sleep(2)
+        @rotary_60sec.clean_older_than(1) { |s| s.tester }
+      end
     end
   end
 end

@@ -83,6 +83,14 @@ describe Rotary do
           pool.clean_older_than(5)
         end
       end
+
+      it 'executes block if given' do
+        mock = Mocker.new # expectation inside
+
+        subject.set(mock)
+        sleep(2)
+        subject.clean_older_than(1) { |s| s.tester }
+      end
     end
   end
 
