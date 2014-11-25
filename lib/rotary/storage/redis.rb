@@ -76,7 +76,7 @@ module Rotary
           no_ttl = ttl_marker == -2
           next if no_ttl
 
-          old = ttl_marker < (@ttl - n)
+          old = @ttl ? ttl_marker < (@ttl - n) : false
           if old
             # delete ttl key
             @redis.del(key)
