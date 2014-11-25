@@ -60,12 +60,10 @@ module Rotary
 
       # Removes sessions, where ttl is bigger than threshold n.
       def clean_older_than(n)
-        len = @redis.llen(@pool_list)
-
         # It doesn't have to happen atomically.
         # New session will be lpush'ed, we can easily check only
         # N sessions from the right.
-        len.times do
+        size.times do
           serialized_session = @redis.rpop(@pool_list)
 
           # We have no sessions left. It can happen.
@@ -74,11 +72,13 @@ module Rotary
           key = ttl_key(serialized_session)
           ttl_marker = @redis.ttl(key)
 
-          # redis.rb returns -2 when key doesn't exist
-          no_ttl = ttl_marker == -2
-          next if no_ttl
+          # When key doesn't exist
+          #   redis <= 2.6 returns -1
+          #   redis >= 2.8 returns -2
+          no_key = [-1, -2].include?(ttl_marker)
+          next if no_key
 
-          old = ttl_marker < (@ttl - n)
+          old = @ttl ? ttl_marker < (@ttl - n) : false
           if old
             # delete ttl key
             @redis.del(key)
@@ -87,7 +87,7 @@ module Rotary
             yield(session) if block_given?
           else
             # push back from the left side
-            @redis.lpush(@pool_list, session)
+            @redis.lpush(@pool_list, serialized_session)
           end
         end
       end
