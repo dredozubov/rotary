@@ -85,7 +85,7 @@ module Rotary
             yield(session) if block_given?
           else
             # push back from the left side
-            @redis.lpush(@pool_list, session)
+            @redis.lpush(@pool_list, serialized_session)
           end
         end
       end
