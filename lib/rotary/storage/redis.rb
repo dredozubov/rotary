@@ -72,9 +72,11 @@ module Rotary
           key = ttl_key(serialized_session)
           ttl_marker = @redis.ttl(key)
 
-          # redis.rb returns -2 when key doesn't exist
-          no_ttl = ttl_marker == -2
-          next if no_ttl
+          # When key doesn't exist
+          #   redis <= 2.6 returns -1
+          #   redis >= 2.8 returns -2
+          no_key = [-1, -2].include?(ttl_marker)
+          next if no_key
 
           old = @ttl ? ttl_marker < (@ttl - n) : false
           if old
