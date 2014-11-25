@@ -60,12 +60,10 @@ module Rotary
 
       # Removes sessions, where ttl is bigger than threshold n.
       def clean_older_than(n)
-        len = @redis.llen(@pool_list)
-
         # It doesn't have to happen atomically.
         # New session will be lpush'ed, we can easily check only
         # N sessions from the right.
-        len.times do
+        size.times do
           serialized_session = @redis.rpop(@pool_list)
 
           # We have no sessions left. It can happen.
