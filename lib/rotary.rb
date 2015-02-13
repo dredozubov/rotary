@@ -24,7 +24,7 @@ module Rotary
       ttl: TTL,
       prefix: PREFIX,
       on_overflow: ->(obj) { raise OverflowError },
-      create: create
+      create: method(:create).call # so ruby 2.2.0 won't complain
     )
       @limit = limit
       storage_options = connection ? { connection: connection } : {}
